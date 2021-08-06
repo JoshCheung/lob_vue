@@ -6,6 +6,7 @@
         <text-input className="text-input-styling" label="To:" placeholder="Recipient Name">
         </text-input>
         <br/>
+        <AddressListModal :addressList="addressList"/>
         <text-input className="text-input-styling" label="From:" placeholder="Describe" >
         </text-input>
         <br/>
@@ -22,6 +23,8 @@
 </template>
 
 <script>
+import AddressListModal from "./AddressListModal.vue";
+
 export default {
   props: {
     msg: String
@@ -36,20 +39,71 @@ export default {
         submitted: false,  
     }
   },
+  mounted(){
+    this.getAddresses();
+  },
+  components: {
+    AddressListModal,
+  },
   methods: {
     getAddresses() {
         var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
         Lob.addresses.list()
             .then((res) => {
-                this.setState({
-                    addresses: res.data
-                })
-                this.state.addresses.sort(this.compare);
-            // console.log(res.data);
+                console.log(res.data);
+                this.addresses = res.data;
             })
             .catch((e) => {
             console.log(e);
         });
+    },
+    filterAddress(query) {
+        return function(person1, person2) {
+            // const person1Name = person1.name.split(/\s+/); //split by any amount of spaces
+            // const person2Name = person2.name.split(/\s+/);
+            // var index1 = person1Name[0].indexOf(query); //check index of searched item
+            // var index2 = person2Name[0].indexOf(query);
+            
+            var index1 = person1.name.indexOf(query); //check index of searched item in name
+            var index2 = person2.name.indexOf(query);
+
+            if (index1 === -1 && index1 < index2) {     //if searched item does not exist for each name
+                return 1;                               //has higher precedence in name2 if not found name1
+            }
+            else if (index2 === -1 && index1 > index2) { 
+                return -1;                              //has higher precedence in name1 if not found name2
+            }   
+            else if (index1 > index2) {                 //name2 has higher precedence if indexOf is smaller than name1
+                return 1;
+            } 
+            else if (index1 < index2) {                 //name1 has higher precedence if indexOf is smaller than name2
+                return -1;
+            }
+            else {              
+                if(person1.name < person2.name)         //if either are not found then compare names in general
+                    return 1;
+                else
+                    return -1;
+            }
+        };
+    },
+    recipientInputChange(e) {
+        var value = e.target.value
+        if (e.target.value !== '') {
+            this.setState({
+                search: value.toUpperCase(),
+                recipientInputModal: true,
+            });
+        }
+        else {
+            this.setState({
+                recipientInputModal: false,
+            });
+        }
+        let filter = this.state.addresses.sort(this.filter(value.toUpperCase()));
+        this.setState({
+            filtered: filter
+        })
     }
   }
 }
