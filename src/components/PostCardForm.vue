@@ -3,10 +3,13 @@
         <text-input className="text-input-styling" label="Description:" placeholder="Describe the mail">
         </text-input>
         <br/>
-        <text-input className="text-input-styling" label="To:" placeholder="Recipient Name">
+        <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" v-on:change="recipientInputChange">
         </text-input>
         <br/>
-        <AddressListModal :addressList="addressList"/>
+        <div v-if="showRecipientInputDropDown">
+          <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
+        </div>
+        
         <text-input className="text-input-styling" label="From:" placeholder="Describe" >
         </text-input>
         <br/>
@@ -23,7 +26,7 @@
 </template>
 
 <script>
-import AddressListModal from "./AddressListModal.vue";
+import AddressListDropDown from "./AddressListDropDown.vue";
 
 export default {
   props: {
@@ -34,7 +37,7 @@ export default {
         addresses: [],
         filtered: [],
         search: '',
-        recipientInputModal: false,
+        showRecipientInputDropDown: false,
         selectedAddress: [],
         submitted: false,  
     }
@@ -43,7 +46,7 @@ export default {
     this.getAddresses();
   },
   components: {
-    AddressListModal,
+    AddressListDropDown,
   },
   methods: {
     getAddresses() {
@@ -90,20 +93,19 @@ export default {
     recipientInputChange(e) {
         var value = e.target.value
         if (e.target.value !== '') {
-            this.setState({
-                search: value.toUpperCase(),
-                recipientInputModal: true,
-            });
+          this.search = value.toUpperCase();
+          this.showRecipientInputDropDown = true;
         }
         else {
-            this.setState({
-                recipientInputModal: false,
-            });
+          this.search = value;
+          this.showRecipientInputDropDown = false;
         }
-        let filter = this.state.addresses.sort(this.filter(value.toUpperCase()));
-        this.setState({
-            filtered: filter
-        })
+        this.filtered = this.addresses.sort(this.filterAddress(value.toUpperCase()));
+    },
+    handleSelectAddress(address) {
+      this.selectedAddress = address;
+      this.showRecipientInputDropDown = false;
+      console.log(this.selectedAddress);
     }
   }
 }
