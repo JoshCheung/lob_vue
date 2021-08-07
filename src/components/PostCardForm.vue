@@ -3,12 +3,21 @@
         <text-input className="text-input-styling" label="Description:" placeholder="Describe the mail">
         </text-input>
         <br/>
-        <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" v-on:change="recipientInputChange">
-        </text-input>
-        <br/>
-        <div v-if="showRecipientInputDropDown">
-          <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
+
+        <div v-if="selectedAddress !== null">
+          <SelectedAddress :selectedAddress="selectedAddress" @cancel="onCancel"/>
         </div>
+        <div v-else>
+          <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" v-on:change="recipientInputChange">
+          </text-input>
+          <div v-if="showRecipientInputDropDown">
+            <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
+          </div>
+        </div>
+        
+        
+        <br/>
+        
         
         <text-input className="text-input-styling" label="From:" placeholder="Describe" >
         </text-input>
@@ -27,6 +36,7 @@
 
 <script>
 import AddressListDropDown from "./AddressListDropDown.vue";
+import SelectedAddress from "./SelectedAddress.vue";
 
 export default {
   props: {
@@ -38,7 +48,7 @@ export default {
         filtered: [],
         search: '',
         showRecipientInputDropDown: false,
-        selectedAddress: [],
+        selectedAddress: null,
         submitted: false,  
     }
   },
@@ -47,6 +57,7 @@ export default {
   },
   components: {
     AddressListDropDown,
+    SelectedAddress,
   },
   methods: {
     getAddresses() {
@@ -106,6 +117,9 @@ export default {
       this.selectedAddress = address;
       this.showRecipientInputDropDown = false;
       console.log(this.selectedAddress);
+    },
+    onCancel() {
+      this.selectedAddress = null;
     }
   }
 }
@@ -122,6 +136,8 @@ export default {
     }
 
     .text-input-styling {
-        text-align: left;
+      text-align: left;
+      margin-bottom: 20px;
+
     }
 </style>
