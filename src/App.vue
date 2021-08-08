@@ -37,9 +37,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
   width: 100%;
-  /* margin-top: 60px; */
 }
 
 .app-container{
@@ -59,7 +57,7 @@ export default {
 .main-component {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  height: 92vh;
 }
 
 .navigation-container{
@@ -67,7 +65,8 @@ export default {
 }
 
 .postcard-form-container { 
-  width: 100%;
+  width: 25%;
+  margin: auto;
 }
 
 </style>
