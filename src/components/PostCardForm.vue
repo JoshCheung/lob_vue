@@ -1,32 +1,45 @@
 <template>
-  <div className="input-container">
-        <text-input className="text-input-styling" label="Description:" placeholder="Describe the mail">
-        </text-input>
-        <br/>
+  <div className="post-card-input-container">
+    <div v-if="hasGetAddressError" className="alert-error">
+      <alert variant="error">
+        <p>There was an error getting addresses</p>
+      </alert>
+    </div>
+    <div className="input-container">
+      <text-input className="text-input-styling" label="Description:" placeholder="Describe the mail">
+      </text-input>
+      <br/>
 
-        <div v-if="selectedAddress !== null">
-          <AddressRow :address="selectedAddress" :selected="true" @click="onCancel"/>
+      <div v-if="selectedAddress !== null">
+        <AddressRow :address="selectedAddress" :selected="true" @click="onCancel"/>
+      </div>
+
+      <div v-else>
+        <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" v-on:change="recipientInputChange">
+        </text-input>
+        <div v-if="showRecipientInputDropDown">
+          <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
         </div>
-        <div v-else>
-          <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" v-on:change="recipientInputChange">
-          </text-input>
-          <div v-if="showRecipientInputDropDown">
-            <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
-          </div>
-        </div>
-        <br/>
-        <text-input className="text-input-styling" label="From:" placeholder="Describe" >
-        </text-input>
-        <br/>
-        <text-input className="text-input-styling" label="Front:" placeholder="">
-        </text-input>
-        <br/>
-        <text-input className="text-input-styling" label="Back:" placeholder="">
-        </text-input>
-        <br/>
-        <lob-button>
-            Submit
-        </lob-button>
+      </div>
+
+      <br/>
+      <text-input className="text-input-styling" label="From:" placeholder="Describe" >
+      </text-input>
+      <br/>
+      
+      <text-input className="text-input-styling" label="Front:" placeholder="">
+      </text-input>
+      <br/>
+
+      <text-input className="text-input-styling" label="Back:" placeholder="">
+      </text-input>
+      <br/>
+
+      <lob-button>
+          Submit
+      </lob-button>
+
+    </div>
   </div>
 </template>
 
@@ -45,7 +58,8 @@ export default {
         search: '',
         showRecipientInputDropDown: false,
         selectedAddress: null,
-        submitted: false,  
+        submitted: false, 
+        hasGetAddressError: false 
     }
   },
   mounted(){
@@ -58,13 +72,14 @@ export default {
   methods: {
     getAddresses() {
         var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
+        // var Lob = require('lob')('test_2312670');
         Lob.addresses.list()
             .then((res) => {
-                console.log(res.data);
                 this.addresses = res.data;
             })
             .catch((e) => {
-            console.log(e);
+              console.log(e);
+              this.hasGetAddressError = true;
         });
     },
     filterAddress(query) {
@@ -132,12 +147,25 @@ export default {
 </script>
 
 <style scoped>
+  .post-card-input-container {
+    margin: auto;
+    height: 100%;
+    width: 100%;
+  }
+
   .input-container {
-      margin: auto;
+    width: 25%;
+    display: block;
+    margin: auto;
+    margin-top: 6%;
   }
 
   .text-input-styling {
     text-align: left;
     margin-bottom: 20px;
+  }
+
+  .alert-error {
+    width: 100%;
   }
 </style>

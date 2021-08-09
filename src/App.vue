@@ -8,7 +8,7 @@
         <MainNaviation/>
       </div>
       <div className="postcard-form-container">
-        <PostCardForm/>
+        <PostCardForm @hasAddressError="getAddressError"/>
       </div>
     </div>
   </div>
@@ -20,13 +20,15 @@ import PostCardForm from "./components/PostCardForm.vue"
 import MainNaviation from "./components/MainNavigation.vue"
 export default {
   name: 'App',
+  data() {
+    return {
+      
+    }
+  },
   components: {
     PostCardForm,
     MainNaviation
-    // homeIcon
-    // HelloWorld,
-    // Button
-  }
+  },
 }
 </script>
 
@@ -43,6 +45,7 @@ export default {
 .app-container{
   height: 100%;
   width: 100%;
+  
 }
 
 .logo-container {
@@ -57,7 +60,7 @@ export default {
 .main-component {
   display: flex;
   flex-direction: row;
-  height: 92vh;
+  height: 100vh;
 }
 
 .navigation-container{
@@ -65,8 +68,8 @@ export default {
 }
 
 .postcard-form-container { 
-  width: 25%;
-  margin: auto;
+  /* margin: auto; */
+  width: 100%;
 }
 
 </style>
