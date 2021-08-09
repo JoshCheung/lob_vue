@@ -1,5 +1,6 @@
 <template>
-    <div className="address" v-bind:key="address" >
+    <!-- Apply conditional css class -->
+    <div v-bind:class="[selected ? 'address selected' : 'address']" v-bind:key="address" >
         <div className="name-text">
             {{address.name}}
             <br/>
@@ -46,6 +47,11 @@
         flex-direction: row;
         border-bottom: 1px solid #ebeff6;
     }
+
+    .selected {
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
+    }
+
     .address-text {
         font-size: 1.2vh;
         color: #6083a5;

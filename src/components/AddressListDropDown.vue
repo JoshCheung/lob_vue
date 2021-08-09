@@ -34,6 +34,7 @@
         height: 400px;
         width: 30%;
         margin-top: -20px;
+        overflow-y: scroll;
     }
 
     .table-styling {
