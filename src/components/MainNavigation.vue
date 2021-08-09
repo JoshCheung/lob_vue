@@ -3,28 +3,28 @@
         <template v-slot="{ expanded }">
             <main-navigation-item
                 title="Overview"
-                iconSrc='@lob/ui-components/src/components/Icons/Home.vue'
+                :iconSrc='home'
                 iconAltText="Overview"
                 to=""
                 :expanded="expanded"
             />
             <main-navigation-item
                 title="Mail Analytics"
-                iconSrc="../node_modules/@lob/ui-components/src/components/Icons/Analytics"
+                :iconSrc='mail'
                 iconAltText="Mail"
                 to=""
                 :expanded="expanded"
             />
             <main-navigation-item
                 title="Address Book"
-                iconSrc="@lob/ui-components/src/components/Icons/Book.vue"
+                :iconSrc='book'
                 iconAltText="Address"
                 to=""
                 :expanded="expanded"
             />
             <main-navigation-item
                 title="HTML Templates"
-                iconSrc="@lob/ui-components/src/components/Icons/DocPage.vue"
+                :iconSrc='docPage'
                 iconAltText="HTML"
                 to=""
                 :expanded="expanded"
@@ -39,6 +39,15 @@
 export default {
   components: {
     // homeIcon
+  },
+  data() {
+      return {
+        //iconSrc was not working so, I passed the images srcs in as props
+        docPage: require('../assets/DocPage.png'),
+        book: require('../assets/Book.png'),
+        home: require('../assets/Home.png'),
+        mail: require('../assets/Mail.png')
+      }
   }
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div className="app-container">
     <div className="logo-container">
-      <img className="logo" :src="require('./assets/lob-logo.png')"/>
+      <img className="logo" :src="require('../public/lob-logo.png')"/>
     </div>
     <div className="main-component">
       <div className="navigation-container">
