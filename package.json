@@ -12,6 +12,7 @@
     "@lob/ui-components": "^0.0.83",
     "core-js": "^3.6.5",
     "lob": "^6.2.1",
+    "selenium-webdriver": "^4.0.0-beta.4",
     "vue": "^3.0.0",
     "vue-i18n": "^9.1.7"
   },
