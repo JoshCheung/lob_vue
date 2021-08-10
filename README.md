@@ -1,24 +1,40 @@
-# lob
+# Lob take home Project #
 
-## Project setup
+## Getting started ##
+# Goal: 
+```txt
+Create a postcard form that has autocomplete when searching for addresses.
+Users will be able to click on an address in the search result and populate the input.
 ```
-npm install
-```
+# Demo Locally: 
 
-### Compiles and hot-reloads for development
+#### Clone the project: 
+```bash
+$ git clone https://github.com/JoshCheung/lob_vue.git
 ```
-npm run serve
+Change directory into the project: 
+```bash
+$ cd lob_vue
 ```
+Install all the dependencies and packages
+```bash
+$ npm install
+```
+run the server, which should run on `http://localhost:8080/`
+```bash
+$ npm run serve
+```
+# Demo online: 
+You can demo the take home project through this site: https://joshcheung.github.io/lob_vue/
 
-### Compiles and minifies for production
-```
-npm run build
-```
+# Resources used:
+- Vue.js
+- lob-ui library 
+-- https://github.com/lob/ui-components
+-- https://ui-components.lob.com/
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+
