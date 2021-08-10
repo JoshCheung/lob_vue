@@ -1,14 +1,16 @@
 <template>
   <div className="app-container">
-    <div className="logo-container">
-      <img className="logo" :src="require('../public/lob-logo.png')"/>
-    </div>
-    <div className="main-component">
-      <div className="navigation-container">
-        <MainNaviation/>
+    <div className="main-container">
+      <div className="logo-container">
+        <img className="logo" :src="require('../public/lob-logo.png')"/>
       </div>
-      <div className="postcard-form-container">
-        <PostCardForm @hasAddressError="getAddressError"/>
+      <div className="main-component">
+        <div className="navigation-container">
+          <MainNaviation/>
+        </div>
+        <div className="postcard-form-container">
+          <PostCardForm @hasAddressError="getAddressError"/>
+        </div>
       </div>
     </div>
   </div>
@@ -43,32 +45,41 @@ export default {
 }
 
 .app-container{
-  height: 100%;
-  width: 100%;
-  
+  width: 100vw;
+  display: flex;
+  flex-direction: column;  
 }
 
 .logo-container {
   width: 100%;
+  display: flex;
   border-bottom: 3px solid #e9ecf5
 }
 
 .logo {
-  width: 12vh;
+   width: 8%;
+}
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .main-component {
   display: flex;
   flex-direction: row;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
 }
 
 .navigation-container{
+  display: flex;
   border-right: 3px solid #e9ecf5;
+  background-color: #f7f8fa;
 }
 
 .postcard-form-container { 
-  /* margin: auto; */
+  display: flex;
   width: 100%;
 }
 

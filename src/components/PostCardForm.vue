@@ -1,12 +1,12 @@
 <template>
   <div className="post-card-input-container">
-    <div v-if="hasGetAddressError" className="alert-error">
+    <div v-if="hasGetAddressError" className="alert-error" v-bind:key="errorMessage">
       <alert variant="error">
-        <p>There was an error getting addresses</p>
+        <p>{{errorMessage}}</p>
       </alert>
     </div>
     <div className="input-container">
-      <text-input className="text-input-styling" label="Description:" placeholder="Describe the mail">
+      <text-input className="text-input-styling" label="Description:" placeholder="Describe the mail" size="small">
       </text-input>
       <br/>
 
@@ -15,7 +15,7 @@
       </div>
 
       <div v-else>
-        <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" v-on:change="recipientInputChange">
+        <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" size="small" v-on:change="recipientInputChange">
         </text-input>
         <div v-if="showRecipientInputDropDown">
           <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
@@ -23,15 +23,15 @@
       </div>
 
       <br/>
-      <text-input className="text-input-styling" label="From:" placeholder="Describe" >
+      <text-input className="text-input-styling" label="From:" size="small" placeholder="Describe" >
       </text-input>
       <br/>
       
-      <text-input className="text-input-styling" label="Front:" placeholder="">
+      <text-input className="text-input-styling" label="Front:" size="small" placeholder="">
       </text-input>
       <br/>
 
-      <text-input className="text-input-styling" label="Back:" placeholder="">
+      <text-input className="text-input-styling" label="Back:" size="small" placeholder="">
       </text-input>
       <br/>
 
@@ -59,7 +59,8 @@ export default {
         showRecipientInputDropDown: false,
         selectedAddress: null,
         submitted: false, 
-        hasGetAddressError: false 
+        hasGetAddressError: false,
+        errorMessage: "" 
     }
   },
   mounted(){
@@ -80,6 +81,7 @@ export default {
             .catch((e) => {
               console.log(e);
               this.hasGetAddressError = true;
+              this.errorMessage = "Unauthorized Client Resource: API key is invalid"
         });
     },
     filterAddress(query) {
@@ -154,8 +156,7 @@ export default {
   }
 
   .input-container {
-    width: 25%;
-    display: block;
+    width: 30%;
     margin: auto;
     margin-top: 6%;
   }
