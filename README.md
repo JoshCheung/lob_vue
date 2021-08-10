@@ -27,7 +27,7 @@ $ npm run serve
 # Demo online: 
 You can demo the take home project through this site: https://joshcheung.github.io/lob_vue/
 
-# Resources used:
+# Resources and frameworks used:
 - Vue.js
 - lob-ui library 
 -- https://github.com/lob/ui-components
