@@ -15,7 +15,7 @@
             {{address.id}}
         </div>
         <div className="button" v-if="selected">
-            <lob-button v-on:click="onCancel()"> 
+            <lob-button id="cancel" v-on:click="onCancel()"> 
                 X
             </lob-button>
         </div>

@@ -58,7 +58,6 @@ export default {
         search: '',
         showRecipientInputDropDown: false,
         selectedAddress: null,
-        submitted: false, 
         hasGetAddressError: false,
         errorMessage: "" 
     }

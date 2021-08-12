@@ -35,6 +35,7 @@
         width: 30%;
         margin-top: -20px;
         overflow-y: scroll;
+        min-width: 400px;
     }
 
     .table-styling {

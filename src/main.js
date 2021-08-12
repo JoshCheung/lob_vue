@@ -6,6 +6,5 @@ import components from '@lob/ui-components';
 import '@lob/ui-components/dist/ui-components.css';
 
 createApp(App)
-// .use(i18n)
 .use(components)
 .mount('#app')
