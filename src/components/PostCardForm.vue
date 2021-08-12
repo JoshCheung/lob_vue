@@ -1,13 +1,12 @@
 <template>
   <div className="post-card-input-container">
     <div v-if="hasGetAddressError" className="alert-error" v-bind:key="errorMessage">
-      <alert variant="error">
+      <alert id="alert" variant="error">
         <p>{{errorMessage}}</p>
       </alert>
     </div>
     <div className="input-container">
-      <text-input name="description" className="text-input-styling" label="Description:" placeholder="Describe the mail" size="small">
-      </text-input>
+      <text-input id="description" name="description" className="text-input-styling" label="Description:" placeholder="Describe the mail" size="small"/>
       <br/>
 
       <div v-if="selectedAddress !== null">
@@ -15,24 +14,20 @@
       </div>
 
       <div v-else>
-        <text-input id="to" className="to text-input-styling" label="To:" placeholder="Recipient Name" size="small" v-on:change="recipientInputChange">
-        </text-input>
+        <text-input id="to" className="to text-input-styling" label="To:" placeholder="Recipient Name" size="small" v-on:change="recipientInputChange"/>
         <div v-if="showRecipientInputDropDown">
           <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
         </div>
       </div>
 
       <br/>
-      <text-input name="from" className="text-input-styling" label="From:" size="small" placeholder="Describe" >
-      </text-input>
+      <text-input id="from" name="from" className="text-input-styling" label="From:" size="small" placeholder="Describe"/>
       <br/>
       
-      <text-input name="front" className="text-input-styling" label="Front:" size="small" placeholder="">
-      </text-input>
+      <text-input id="front" name="front" className="text-input-styling" label="Front:" size="small" placeholder=""/>
       <br/>
 
-      <text-input name="back" className="text-input-styling" label="Back:" size="small" placeholder="">
-      </text-input>
+      <text-input id="back" name="back" className="text-input-styling" label="Back:" size="small" placeholder=""/>
       <br/>
 
       <lob-button>
@@ -53,13 +48,13 @@ export default {
   },
   data(){
     return {
-        addresses: [],
-        filtered: [],
-        search: '',
-        showRecipientInputDropDown: false,
-        selectedAddress: null,
-        hasGetAddressError: false,
-        errorMessage: "" 
+      addresses: [],
+      filtered: [],
+      search: '',
+      showRecipientInputDropDown: false,
+      selectedAddress: null,
+      hasGetAddressError: false,
+      errorMessage: "" 
     }
   },
   mounted(){
