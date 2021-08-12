@@ -1,7 +1,7 @@
 var assert = require('chai').assert;
 
 
-const {Builder, By, Key, util, until} = require("selenium-webdriver");
+const {Builder, By, until} = require("selenium-webdriver");
 
 async function suggestiveInputTest() {
     var input = "Adriana";
