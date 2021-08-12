@@ -6,9 +6,11 @@
 Create a postcard form that has autocomplete when searching for addresses.
 Users will be able to click on an address in the search result and populate the input.
 ```
-# Demo Locally: 
+#### Note:
+- The submit button is not functional
+- Only the "To" input works as it give suggestions of addresses
 
-#### Clone the project: 
+# Demo Locally: 
 ```bash
 $ git clone https://github.com/JoshCheung/lob_vue.git
 ```
@@ -32,6 +34,50 @@ You can demo the take home project through this site: https://joshcheung.github.
 - lob-ui library 
 -- https://github.com/lob/ui-components
 -- https://ui-components.lob.com/
+
+# Running unit test
+
+```bash
+    npm run test:unit
+```
+
+# Running Selenium test
+
+Install the chromedriver from: https://chromedriver.chromium.org/
+- Unzip the file and place the file into your Path: 
+eg.
+```bash
+    $ cat /etc/paths
+
+        /usr/local/bin
+        /usr/bin
+        /bin
+        /usr/sbin
+        /sbin
+
+    # path: /usr/local/bin
+    $ ls /usr/local/bin
+        chromedriver lib          node         npm          npx          vue          webpack
+```
+- Once the chromedriver is in the path, ensure that package.json includes:
+```bash
+    "dependencies": {
+        "chai": "^4.3.4",
+        "selenium-webdriver": "^4.0.0-beta.4",
+    }
+
+```
+- run `npm install` to ensure dependencies are installed
+
+- Run the selenium test:
+
+```bash
+$ cd tests
+$ node suggestionInputTest.js
+```
+
+
+
 
 
 
