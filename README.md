@@ -72,8 +72,7 @@ eg.
 - Run the selenium test:
 
 ```bash
-$ cd tests
-$ node suggestionInputTest.js
+$ node tests/suggestionInputTest.js
 ```
 
 
