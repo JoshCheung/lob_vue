@@ -6,7 +6,7 @@
       </alert>
     </div>
     <div className="input-container">
-      <text-input className="text-input-styling" label="Description:" placeholder="Describe the mail" size="small">
+      <text-input name="description" className="text-input-styling" label="Description:" placeholder="Describe the mail" size="small">
       </text-input>
       <br/>
 
@@ -15,7 +15,7 @@
       </div>
 
       <div v-else>
-        <text-input className="text-input-styling" label="To:" placeholder="Recipient Name" size="small" v-on:change="recipientInputChange">
+        <text-input id="to" className="to text-input-styling" label="To:" placeholder="Recipient Name" size="small" v-on:change="recipientInputChange">
         </text-input>
         <div v-if="showRecipientInputDropDown">
           <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
@@ -23,15 +23,15 @@
       </div>
 
       <br/>
-      <text-input className="text-input-styling" label="From:" size="small" placeholder="Describe" >
+      <text-input name="from" className="text-input-styling" label="From:" size="small" placeholder="Describe" >
       </text-input>
       <br/>
       
-      <text-input className="text-input-styling" label="Front:" size="small" placeholder="">
+      <text-input name="front" className="text-input-styling" label="Front:" size="small" placeholder="">
       </text-input>
       <br/>
 
-      <text-input className="text-input-styling" label="Back:" size="small" placeholder="">
+      <text-input name="back" className="text-input-styling" label="Back:" size="small" placeholder="">
       </text-input>
       <br/>
 
@@ -156,7 +156,8 @@ export default {
   }
 
   .input-container {
-    width: 30%;
+    width: 25vw;
+    min-width: 400px;
     margin: auto;
     margin-top: 6%;
   }

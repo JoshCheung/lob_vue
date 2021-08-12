@@ -1,5 +1,5 @@
 <template>
-    <div className="dropdown-container">
+    <div id="dropdown" className="dropdown-container">
         <div :key="address" v-for="address in filteredAddressList">
             <div>  
                 <AddressRow :address="address" v-on:click="selectAddress(address)"/>
@@ -31,7 +31,7 @@
         position: absolute;
         background-color: white;
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
-        height: 400px;
+        height: 375px;
         width: 30%;
         margin-top: -20px;
         overflow-y: scroll;

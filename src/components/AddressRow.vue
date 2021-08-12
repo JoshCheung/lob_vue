@@ -1,7 +1,7 @@
 <template>
     <!-- Apply conditional css class -->
     <div v-bind:class="[selected ? 'address selected' : 'address']" v-bind:key="address" >
-        <div className="name-text">
+        <div className="text-boxes">
             {{address.name}}
             <br/>
             <br/>
@@ -11,7 +11,7 @@
             <br/>
             {{address.address_country}}
         </div>
-        <div className="address-text"> 
+        <div className="text-boxes addressId-text"> 
             {{address.id}}
         </div>
         <div className="button" v-if="selected">
@@ -52,29 +52,23 @@
         box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
     }
 
-    .address-text {
-        font-size: 1.2vh;
+    .text-boxes {
+        font-size: 0.8rem;
         color: #6083a5;
         margin-top: auto;
         margin-bottom: auto;
         padding: 20px;
-        text-align: right;
         width: 50%;
+        text-align: left;
     }
 
-    .name-text {
-        margin-top: auto;
-        margin-bottom: auto;
-        padding: 20px;
-        font-size: 1.3vh;
-        color: #6083a5;
-        text-align: left;
-        width: 50%;
+    .addressId-text {
+        text-align: right;
     }
+
 
     .button {
         margin: auto;
         padding: 10px;
-        height: 50%;
     }
 </style>
