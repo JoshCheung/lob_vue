@@ -76,6 +76,7 @@ export default {
   display: flex;
   border-right: 3px solid #e9ecf5;
   background-color: #f7f8fa;
+  min-height: 700px;
 }
 
 .postcard-form-container { 
