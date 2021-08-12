@@ -74,10 +74,10 @@ describe('PostcardForm.vue', () => {
         plugins: [LobComponents]
       },
     });
-    const searchItem = "Adriana"
+    
+    
     // Act
-
-    // const input =  wrapper.find('#to');
+    const searchItem = "Adriana"
     const input = wrapper.find('#to');
     input.element.value = searchItem;
     input.trigger('input');
