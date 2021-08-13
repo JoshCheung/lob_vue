@@ -7,8 +7,8 @@ Create a postcard form that has autocomplete when searching for addresses.
 Users will be able to click on an address in the search result and populate the input.
 ```
 #### Note:
+- To/From address suggestion is functional 
 - The submit button is not functional
-- Only the "To" input works as it give suggestions of addresses
 - The side navigation is only cosmetic
 
 # Demo Locally: 

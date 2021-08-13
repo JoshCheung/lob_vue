@@ -47,10 +47,10 @@ export default {
   methods: {
     getAddresses() {
         // test_f6f5743a658e682896d58acd02f42b9e2e8 personal api_key
-        // var Lob = require('lob')('test_f6f5743a658e682896d58acd02f42b9e2e8');
-        var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
+        var Lob = require('lob')('test_f6f5743a658e682896d58acd02f42b9e2e8');
+        // var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
 
-        //  var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
+        // var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
         // var Lob = require('lob')('test_2312670');
         Lob.addresses.list()
             .then((res) => {
@@ -62,63 +62,6 @@ export default {
               this.errorMessage = error.statusCode + " " + error.body.error.message;
         });
     },
-    filterAddress(query) {
-        return function(person1, person2) {
-
-            // take whole address and search for the query to account for searching address
-            var person1Address = person1.name + person1.address_line1 + person1.address_line2 + person1.address_city + person1.address_state + person1.address_zip + person1.address_country;
-            var person2Address = person2.name + person2.address_line1 + person2.address_line2 + person2.address_city + person2.address_state + person2.address_zip + person2.address_country;
-
-            // const person1Name = person1.name.split(/\s+/); //split by any amount of spaces
-            // const person2Name = person2.name.split(/\s+/);
-            // var index1 = person1Name[0].indexOf(query); //check index of searched item
-            // var index2 = person2Name[0].indexOf(query);
-            
-            // var index1 = person1.name.indexOf(query); //check index of searched item in name
-            // var index2 = person2.name.indexOf(query);
-
-            var index1 = person1Address.indexOf(query);
-            var index2 = person2Address.indexOf(query);
-
-            if (index1 === -1 && index1 < index2) {     //if searched item does not exist for each name
-                return 1;                               //has higher precedence in name2 if not found name1
-            }
-            else if (index2 === -1 && index1 > index2) { 
-                return -1;                              //has higher precedence in name1 if not found name2
-            }   
-            else if (index1 > index2) {                 //name2 has higher precedence if indexOf is smaller than name1
-                return 1;
-            } 
-            else if (index1 < index2) {                 //name1 has higher precedence if indexOf is smaller than name2
-                return -1;
-            }
-            else {              
-                if(person1.name < person2.name)         //if either are not found then compare names in general
-                    return 1;
-                else
-                    return -1;
-            }
-        };
-    },
-    recipientInputChange(e) {
-        var value = e.target.value
-        if (e.target.value !== '') {
-          this.search = value.toUpperCase();
-          this.showRecipientInputDropDown = true;
-        }
-        else {
-          this.search = value;
-          this.showRecipientInputDropDown = false;
-        }
-        this.filtered = this.addresses.sort(this.filterAddress(value.toUpperCase()));
-    },
-    handleSelectAddress(address) {
-      this.selectedAddress = address;
-      this.showRecipientInputDropDown = false;
-    },
-    onCancel() {
-      this.selectedAddress = null;
-    }
   }
 }
 
