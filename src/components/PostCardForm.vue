@@ -8,22 +8,10 @@
     <div className="input-container">
       <text-input id="description" name="description" className="text-input-styling" label="Description:" placeholder="Describe the mail" size="small"/>
       <br/>
-
-      <div v-if="selectedAddress !== null">
-        <AddressRow :address="selectedAddress" :selected="true" @click="onCancel"/>
-      </div>
-
-      <div v-else>
-        <text-input id="to" className="to text-input-styling" label="To:" placeholder="Recipient Name" size="small" v-on:change="recipientInputChange"/>
-        <div v-if="showRecipientInputDropDown">
-          <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
-        </div>
-      </div>
-
+        <SearchAddress :inputId="'To'" :inputLabel="'To'" :inputPlaceholder="'Recipient'" :addresses="addresses" />
       <br/>
-      <text-input id="from" name="from" className="text-input-styling" label="From:" size="small" placeholder="Describe"/>
+        <SearchAddress :iinputId="'From'" :inputLabel="'From'" :inputPlaceholder="'Sender'" :addresses="addresses"/>
       <br/>
-      
       <text-input id="front" name="front" className="text-input-styling" label="Front:" size="small" placeholder=""/>
       <br/>
 
@@ -39,20 +27,13 @@
 </template>
 
 <script>
-import AddressListDropDown from "./AddressListDropDown.vue";
-import AddressRow from "./AddressRow.vue";
+import SearchAddress from './SearchAddress'
 
 export default {
-  props: {
-    msg: String
-  },
   data(){
     return {
       addresses: [],
       filtered: [],
-      search: '',
-      showRecipientInputDropDown: false,
-      selectedAddress: null,
       hasGetAddressError: false,
       errorMessage: "" 
     }
@@ -61,21 +42,24 @@ export default {
     this.getAddresses();
   },
   components: {
-    AddressListDropDown,
-    AddressRow,
+    SearchAddress
   },
   methods: {
     getAddresses() {
+        // test_f6f5743a658e682896d58acd02f42b9e2e8 personal api_key
+        // var Lob = require('lob')('test_f6f5743a658e682896d58acd02f42b9e2e8');
         var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
+
+        //  var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
         // var Lob = require('lob')('test_2312670');
         Lob.addresses.list()
             .then((res) => {
                 this.addresses = res.data;
             })
             .catch((e) => {
-              console.log(e);
+              var error = e._response;
               this.hasGetAddressError = true;
-              this.errorMessage = "Unauthorized Client Resource: API key is invalid"
+              this.errorMessage = error.statusCode + " " + error.body.error.message;
         });
     },
     filterAddress(query) {
@@ -131,7 +115,6 @@ export default {
     handleSelectAddress(address) {
       this.selectedAddress = address;
       this.showRecipientInputDropDown = false;
-      console.log(this.selectedAddress);
     },
     onCancel() {
       this.selectedAddress = null;
