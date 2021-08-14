@@ -136,7 +136,7 @@ export default {
   }
 
   .input-container {
-    width: 30vw;
+    width: 25vw;
     min-width: 400px;
     margin: auto;
     margin-top: 6%;
