@@ -57,7 +57,7 @@
         color: #6083a5;
         margin-top: auto;
         margin-bottom: auto;
-        padding: 20px;
+        padding: 15px;
         width: 50%;
         text-align: left;
     }

@@ -15,7 +15,7 @@
 import AddressRow from "./AddressRow.vue";
 import AddressListDropDown from './AddressListDropDown'
 export default {
-    props: [ 'inputId', 'inputLabel', 'inputPlaceholder', 'addresses'],
+    props: [ 'inputId', 'inputLabel', 'inputPlaceholder', 'addresses', 'successfullyCreatedPostcard'],
     components: {
         AddressRow,
         AddressListDropDown
@@ -83,9 +83,18 @@ export default {
         handleSelectAddress(address) {
             this.selectedAddress = address;
             this.showRecipientInputDropDown = false;
+            this.$emit('selectedAddress', address);
         },
         onCancel() {
             this.selectedAddress = null;
+            this.$emit('selectedAddress', "");
+        }
+    },
+    watch: {
+        successfullyCreatedPostcard: function() {
+            if (this.successfullyCreatedPostcard) {
+                this.onCancel();
+            }
         }
     }
 }

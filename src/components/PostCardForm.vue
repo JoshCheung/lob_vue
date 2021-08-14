@@ -1,33 +1,41 @@
 <template>
   <div className="post-card-input-container">
-    <div v-if="hasGetAddressError" className="alert-error" v-bind:key="errorMessage">
+    <div v-if="hasGetAddressError" className="alert-bar" v-bind:key="errorMessage">
       <alert id="alert" variant="error">
         <p>{{errorMessage}}</p>
       </alert>
     </div>
+    <div v-else-if="successfullyCreatedPostcard" className="alert-bar">
+        <alert id="alert" variant="success">
+          <p>Postcard was successfully created!</p>
+        </alert>
+    </div> 
     <div className="input-container">
-      <text-input id="description" name="description" className="text-input-styling" label="Description:" placeholder="Describe the mail" size="small"/>
+      <PostcardContent :inputId="'Description'" :inputLabel="'Description:'" :inputPlaceholder="'Description'" @content="updateDescription" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
-        <SearchAddress :inputId="'To'" :inputLabel="'To'" :inputPlaceholder="'Recipient'" :addresses="addresses" />
+      
+      <SearchAddress :inputId="'To'" :inputLabel="'To:'" :inputPlaceholder="'Recipient'" :addresses="addresses" @selectedAddress="selectToAddress" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
-        <SearchAddress :iinputId="'From'" :inputLabel="'From'" :inputPlaceholder="'Sender'" :addresses="addresses"/>
-      <br/>
-      <text-input id="front" name="front" className="text-input-styling" label="Front:" size="small" placeholder=""/>
-      <br/>
-
-      <text-input id="back" name="back" className="text-input-styling" label="Back:" size="small" placeholder=""/>
+      
+      <SearchAddress :inputId="'From'" :inputLabel="'From:'" :inputPlaceholder="'Sender'" :addresses="addresses" @selectedAddress="selectFromAddress" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
 
-      <lob-button>
+      <PostcardContent :inputId="'front'" :inputLabel="'Front:'" :inputPlaceholder="'Hi'" @content="updateFront" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
+      <br/>
+
+      <PostcardContent :inputId="'back'" :inputLabel="'Back:'" :inputPlaceholder="'Bye'" @content="updateBack" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
+      <br/>
+
+      <lob-button v-on:click="onSubmit">
           Submit
       </lob-button>
-
     </div>
   </div>
 </template>
 
 <script>
-import SearchAddress from './SearchAddress'
+import SearchAddress from './SearchAddress';
+import PostcardContent from './PostcardContent';
 
 export default {
   data(){
@@ -35,19 +43,27 @@ export default {
       addresses: [],
       filtered: [],
       hasGetAddressError: false,
-      errorMessage: "" 
+      errorMessage: "",
+      description: "",
+      selectedToAddress: null,
+      selectedFromAddress: null,
+      front: "",
+      back:  "",
+      successfullyCreatedPostcard: false
     }
   },
   mounted(){
     this.getAddresses();
   },
   components: {
-    SearchAddress
+    SearchAddress,
+    PostcardContent
   },
   methods: {
     getAddresses() {
-        // test_f6f5743a658e682896d58acd02f42b9e2e8 personal api_key
         var Lob = require('lob')('test_f6f5743a658e682896d58acd02f42b9e2e8');
+        // test_f6f5743a658e682896d58acd02f42b9e2e8 personal api_key
+        
         // var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
 
         // var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
@@ -62,6 +78,50 @@ export default {
               this.errorMessage = error.statusCode + " " + error.body.error.message;
         });
     },
+
+    selectToAddress(address) {
+      this.selectedToAddress = address.id;
+    },
+
+    selectFromAddress(address) {
+      this.selectedFromAddress = address.id;
+    },
+
+    updateDescription(content) {
+      this.description = content;
+    },
+
+    updateFront(content) {
+      this.front = content;
+    },
+
+    updateBack(content) {
+      this.back = content;
+    },
+
+    onSubmit() {
+      var Lob = require('lob')('test_f6f5743a658e682896d58acd02f42b9e2e8');
+      Lob.postcards.create({
+        description: this.description,
+        to: this.selectedToAddress,
+        from: this.selectedFromAddress,
+        front: '<html style="padding: 1in; font-size: 50>' + this.front + '</html>',
+        back: '<html  style="padding: 1in; font-size: 50>' + this.back + '</html>',
+      }, (err, res) => {
+        // console.log(err);
+        if(res._response.statusCode === 200) {
+          this.hasGetAddressError = false;
+          this.successfullyCreatedPostcard = true;
+          setTimeout(() => this.successfullyCreatedPostcard = false, 2000);
+        }
+
+      })
+      .catch((e) => {
+        var error = e._response;
+        this.hasGetAddressError = true;
+        this.errorMessage = "Error: " + error.statusCode + " " + error.body.error.message;
+      });
+    }
   }
 }
 
@@ -76,7 +136,7 @@ export default {
   }
 
   .input-container {
-    width: 25vw;
+    width: 30vw;
     min-width: 400px;
     margin: auto;
     margin-top: 6%;
@@ -87,7 +147,7 @@ export default {
     margin-bottom: 20px;
   }
 
-  .alert-error {
+  .alert-bar {
     width: 100%;
   }
 </style>

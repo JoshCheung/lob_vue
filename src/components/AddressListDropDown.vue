@@ -18,7 +18,6 @@
         },
         methods: {
             selectAddress(address) {
-                console.log(address);
                 this.$emit('select-Address', address);
             }
         }
