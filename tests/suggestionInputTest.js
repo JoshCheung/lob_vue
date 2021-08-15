@@ -62,9 +62,11 @@ async function testSendingPostCard() {
     // var selectedAddress = await address.findElement(By.className("text-boxes")).getText();
     // await address.findElement(By.className("button")).findElement(By.id("cancel")).click();
     driver.findElement(By.id("sendPostCard")).click();
-    var success = await driver.wait(until.elementLocated(By.id("success-alert")), 5000);
-    assert.equal("Postcard was successfully created!", await success.getText());
-    console.log(success.getText());
+    var success = await driver.wait(until.elementLocated(By.id("success-alert")), 3000);
+    resultText = await success.getText();
+
+    assert.equal("Postcard was successfully created!", resultText);
+
     setTimeout(function () {
         driver.quit()
     }, 5000);

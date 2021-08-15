@@ -112,7 +112,7 @@ export default {
         if(res._response.statusCode === 200) {
           this.hasGetAddressError = false;
           this.successfullyCreatedPostcard = true;
-          setTimeout(() => this.successfullyCreatedPostcard = false, 5000);
+          setTimeout(() => this.successfullyCreatedPostcard = false, 3000);
         }
 
       })
