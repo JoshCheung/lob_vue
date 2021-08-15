@@ -1,32 +1,32 @@
 <template>
   <div className="post-card-input-container">
     <div v-if="hasGetAddressError" className="alert-bar" v-bind:key="errorMessage">
-      <alert id="alert" variant="error">
+      <alert id="error-alert" variant="error">
         <p>{{errorMessage}}</p>
       </alert>
     </div>
-    <div v-else-if="successfullyCreatedPostcard" className="alert-bar">
-        <alert id="alert" variant="success">
+    <div v-else-if="successfullyCreatedPostcard" className="success alert-bar">
+        <alert id="success-alert" variant="success">
           <p>Postcard was successfully created!</p>
         </alert>
     </div> 
     <div className="input-container">
-      <PostcardContent :inputId="'Description'" :inputLabel="'Description:'" :inputPlaceholder="'Description'" @content="updateDescription" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
+      <PostcardContent :id="'description'" :label="'Description:'" :placeholder="'Description'" @content="updateDescription" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
       
-      <SearchAddress :inputId="'To'" :inputLabel="'To:'" :inputPlaceholder="'Recipient'" :addresses="addresses" @selectedAddress="selectToAddress" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
+      <SearchAddress :id="'to'" :label="'To:'" :placeholder="'Recipient'" :addresses="addresses" @selectedAddress="selectToAddress" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
       
-      <SearchAddress :inputId="'From'" :inputLabel="'From:'" :inputPlaceholder="'Sender'" :addresses="addresses" @selectedAddress="selectFromAddress" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
+      <SearchAddress :id="'from'" :label="'From:'" :placeholder="'Sender'" :addresses="addresses" @selectedAddress="selectFromAddress" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
 
-      <PostcardContent :inputId="'front'" :inputLabel="'Front:'" :inputPlaceholder="'Hi'" @content="updateFront" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
+      <PostcardContent :id="'front'" :label="'Front:'" :placeholder="'Hi'" @content="updateFront" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
 
-      <PostcardContent :inputId="'back'" :inputLabel="'Back:'" :inputPlaceholder="'Bye'" @content="updateBack" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
+      <PostcardContent :id="'back'" :label="'Back:'" :placeholder="'Bye'" @content="updateBack" :successfullyCreatedPostcard="successfullyCreatedPostcard"/>
       <br/>
 
-      <lob-button v-on:click="onSubmit">
+      <lob-button id="sendPostCard" v-on:click="onSubmit">
           Submit
       </lob-button>
     </div>
@@ -112,7 +112,7 @@ export default {
         if(res._response.statusCode === 200) {
           this.hasGetAddressError = false;
           this.successfullyCreatedPostcard = true;
-          setTimeout(() => this.successfullyCreatedPostcard = false, 2000);
+          setTimeout(() => this.successfullyCreatedPostcard = false, 5000);
         }
 
       })

@@ -1,7 +1,8 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import PostcardForm from '@/components/PostcardForm.vue'
 import AddressListDropDown from '@/components/AddressListDropDown'
-import AddressRow from '@/components/AddressRow';
+import AddressRow from '@/components/AddressRow'
+import SearchAddress from '@/components/SearchAddress'
 
 import LobComponents from '@lob/ui-components';  
 
@@ -31,7 +32,7 @@ describe('PostcardForm.vue', () => {
 
   test('Check dropdown flag', async () => {
     // Arrange 
-    const wrapper = mount(PostcardForm, {
+    const wrapper = mount(SearchAddress, {
       data() {
         return {
           showRecipientInputDropDown: true,
@@ -60,7 +61,7 @@ describe('PostcardForm.vue', () => {
   test('Test filter function when in "To" input changes', async () => {
    
     // Arrange 
-    const mockFilterMethod = jest.spyOn(PostcardForm.methods, 'filterAddress')
+    const mockFilterMethod = jest.spyOn(SearchAddress.methods, 'filterAddress')
     const wrapper = mount(PostcardForm, {
       data() {
         return {
@@ -90,7 +91,7 @@ describe('PostcardForm.vue', () => {
 
   test('check selected address component exists when address is selected', async () => {
     // Arrange 
-    const wrapper = mount(PostcardForm, {
+    const wrapper = mount(SearchAddress, {
       data() {
         return {
           selectedAddress: {id: "adr_justiceLeaugue", name: 'Bruce Wayne', address_line1: '123 Harley Way', address_line2: '', address_city: "Gotham", address_state: "BM", address_zip: "34791"},
@@ -152,7 +153,7 @@ describe('PostcardForm.vue', () => {
 
   test('Testing cancel button in selected Address', async () => {
     // Arrange 
-    const wrapper = mount(PostcardForm, {
+    const wrapper = mount(SearchAddress, {
       data() {
         return {
           selectedAddress: {id: "adr_justiceLeaugue", name: 'Bruce Wayne', address_line1: '123 Harley Way', address_line2: '', address_city: "Gotham", address_state: "BM", address_zip: "34791"},

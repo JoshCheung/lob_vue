@@ -1,11 +1,11 @@
 <template>
-    <text-input v-bind:id="inputId" className="text-input-styling" v-bind:label="inputLabel" size="small" v-bind:placeholder="inputPlaceholder" 
+    <text-input :id="id" className="text-input-styling" :label="label" size="small" :placeholder="placeholder" 
         v-on:change="handleContentChange"/>
 </template>
 
 <script>
 export default {
-    props: [ 'inputId', 'inputLabel', 'inputPlaceholder', 'successful'],
+    props: [ 'id', 'label', 'placeholder', 'successful'],
     data() {
         return {
             content: ""

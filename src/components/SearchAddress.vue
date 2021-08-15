@@ -4,7 +4,7 @@
       </div>
 
       <div v-else>
-        <text-input className="text-input-styling" v-bind:inputId="inputId" v-bind:label="inputLabel" v-bind:placeholder="inputPlaceholder" size="small" v-on:change="recipientInputChange"/>
+        <text-input className="text-input-styling" :id="id" :label="label" :placeholder="placeholder" size="small" v-on:change="recipientInputChange"/>
         <div v-if="showRecipientInputDropDown">
           <AddressListDropDown :filteredAddressList="filtered" @select-Address="handleSelectAddress"/>
         </div>
@@ -15,7 +15,7 @@
 import AddressRow from "./AddressRow.vue";
 import AddressListDropDown from './AddressListDropDown'
 export default {
-    props: [ 'inputId', 'inputLabel', 'inputPlaceholder', 'addresses', 'successfullyCreatedPostcard'],
+    props: [ 'id', 'label', 'placeholder', 'addresses', 'successfullyCreatedPostcard'],
     components: {
         AddressRow,
         AddressListDropDown
