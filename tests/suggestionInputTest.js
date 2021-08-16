@@ -36,8 +36,8 @@ async function testSendingPostCard() {
     var inputTo = "Milo";
     var inputFrom = "Enoki";
     let driver = await new Builder().forBrowser("chrome").build();
-    // await driver.get("https://joshcheung.github.io/lob_vue/");
-    await driver.get("http://localhost:8080/lob_vue/");
+    await driver.get("https://joshcheung.github.io/lob_vue/");
+    // await driver.get("http://localhost:8080/lob_vue/");
     // wait for addresses to load
     new Promise(() => setTimeout(function() {
         driver.findElement(By.id("to")).sendKeys(inputTo);
