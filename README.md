@@ -8,8 +8,8 @@ Users will be able to click on an address in the search result and populate the 
 ```
 #### Note:
 - All inputs are functional, but 'To' and 'From' autocomplete are the main functions to showcase
-- The submit button is for testing the endpoints of creating the postcards, 
-    - feel free to give it a try after selecting addreeses
+- The submit button is for testing the endpoints of creating the postcards 
+    - Feel free to give it a try after selecting addreeses
 - The side navigation is purely cosmetic
 
 # Demo Locally: 
