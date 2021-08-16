@@ -133,13 +133,13 @@ describe('PostcardForm.vue', () => {
     });
 
     // Act
-    const hasError = wrapper.find('#alert');
+    const hasError = wrapper.find('#error-alert');
     
     // Assert
     expect(hasError.exists()).toBeTruthy();
 
     // Act
-    const eMessage = wrapper.find('#alert').text();
+    const eMessage = wrapper.find('#error-alert').text();
     
     // Assert
     expect(eMessage).toBe("Error Message");

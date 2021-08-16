@@ -61,12 +61,10 @@ export default {
   },
   methods: {
     getAddresses() {
-        var Lob = require('lob')('test_f6f5743a658e682896d58acd02f42b9e2e8');
+        // var Lob = require('lob')('test_f6f5743a658e682896d58acd02f42b9e2e8');
         // test_f6f5743a658e682896d58acd02f42b9e2e8 personal api_key
-        
-        // var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
 
-        // var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
+        var Lob = require('lob')('test_8ddaad35dc02260ae8a4e6e33d9f3ade7ae');
         // var Lob = require('lob')('test_2312670');
         Lob.addresses.list()
             .then((res) => {

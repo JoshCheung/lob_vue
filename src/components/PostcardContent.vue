@@ -1,5 +1,5 @@
 <template>
-    <text-input :id="id" className="text-input-styling" :label="label" size="small" :placeholder="placeholder" 
+    <text-input className="text-input-styling" :id="id" :label="label" :placeholder="placeholder" size="small"
         v-on:change="handleContentChange"/>
 </template>
 
